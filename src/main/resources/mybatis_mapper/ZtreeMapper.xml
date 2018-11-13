@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.ztree.idao.ZtreeMapper">
+
+    <select id="getNodes" resultType="com.test.ztree.entity.TreeNode">
+	    select t.id, t.pid, t.name, 'false' as open, 'true' as isparent 
+		from treenode t
+		where t.pid = '0'
+    </select>
+    
+    <select id="asyncGetNodes" parameterType="com.test.ztree.entity.TreeNode" resultType="com.test.ztree.entity.TreeNode">
+        select t.id, t.pid, t.name, 'false' as open, 'false' as isparent 
+        from treenode t
+        where t.pid = #{id, jdbcType=VARCHAR}
+    </select>
+</mapper>
